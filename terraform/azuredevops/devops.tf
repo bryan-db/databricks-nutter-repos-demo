@@ -34,11 +34,16 @@ resource "azuredevops_build_definition" "build" {
 }
 
 resource "databricks_token" "pat_for_devops" {
+  depends_on = [azurerm_databricks_workspace.this]
+
+  provider = databricks
   comment          = "Azure DevOps Nutter demo (10 days)"
   lifetime_seconds = 864000
 }
 
 resource "azuredevops_variable_group" "vg" {
+  depends_on = [azurerm_databricks_workspace.this]
+
   project_id   = azuredevops_project.project.id
   name         = "Nutter Testing"
   description  = "Variable group for build job"
@@ -46,7 +51,7 @@ resource "azuredevops_variable_group" "vg" {
 
   variable {
     name  = "databricks_host"
-    value = data.databricks_current_user.me.workspace_url
+    value = "https://${azurerm_databricks_workspace.this.workspace_url}"
   }
 
   variable {
