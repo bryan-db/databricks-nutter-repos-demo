@@ -4,6 +4,10 @@ This directory contains Terraform code to setup a Nutter demo project in the Azu
 * `devops_pat`       - Azure DevOps personal access token (PAT) obtained as described in [documentation](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/guides/authenticating_using_the_personal_access_token).  This PAT will be used to create a project in your Azure DevOps organization, and will be set inside Databricks workspace.
 * `devops_user_name` - your user name inside Azure DevOps organization.
 
+Additional Variables for Azure Deployment
+* `az_region`           - Azure Region to use for deployment
+* `az_subscription_id`  - Azure Subscription ID
+
 And then execute `terraform apply` (use `terraform plan` to understand what changes will be made).
 
 The code performs following actions:
